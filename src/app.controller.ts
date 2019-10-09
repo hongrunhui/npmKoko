@@ -29,6 +29,7 @@ export class AppController {
       const reaplaceJsPath = path.resolve(process.cwd(), 'src/js');
       const necooPath = path.resolve(process.cwd(), 'necoo');
       const resultPath = path.resolve(process.cwd(), 'src/page/index.html');
+      const errResultPath = path.resolve(process.cwd(), 'src/page/index_error.html');
       var cmdStr = `
         npm i ${npmName} --save-dev
     `;
@@ -46,6 +47,7 @@ export class AppController {
               exec(`npm run build`, {cwd: necooPath}, function (err, stdout, stderr) {
                 if (err) {
                   console.log('build error:' + stderr);
+                  res.sendFile(errResultPath);
                 }
                 else {
                   console.log('build success:' + stdout);

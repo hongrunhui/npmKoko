@@ -13,6 +13,8 @@
     "cat": "^0.2.0",
     "cheerio": "^1.0.0-rc.3",
     "d3.js": "0.0.2-security",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
     "manifest.json": "^1.2.0",
     "mobx": "^5.14.0",
     "redux": "^4.0.4",
