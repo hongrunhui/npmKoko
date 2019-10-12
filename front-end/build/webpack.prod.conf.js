@@ -35,6 +35,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     new UglifyJsPlugin({
+        test: /necoo-d3\.js(\?.*)?$/i,
       uglifyOptions: {
         compress: {
           warnings: false

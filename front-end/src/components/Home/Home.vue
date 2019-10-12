@@ -50,7 +50,7 @@
     import'codemirror/addon/fold/markdown-fold.js'
     import'codemirror/addon/fold/xml-fold.js'
     import { codemirror } from 'vue-codemirror'
-    import * as API from 'riot-seed-flux';
+    import * as API from 'vue';
     export default {
         name: 'Home',
         components: {
@@ -97,7 +97,7 @@
             }
         },
         mounted() {
-            const data = api2html(API, 'riot-seed-flux');
+            const data = api2html(API, 'vue');
             const boxSelector = '.tree-box';
             renderTree(boxSelector, data, (d) => {
                 const code = d.data.value.toString();
@@ -105,7 +105,7 @@
             });
             setTimeout(() => {
                 this.styleSelectedText =  true,
-                this.cmOption.styleActiveLine = true
+                    this.cmOption.styleActiveLine = true
             }, 1800)
         }
     }
