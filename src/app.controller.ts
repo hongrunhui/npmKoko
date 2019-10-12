@@ -40,7 +40,7 @@ export class AppController {
     `;
       console.log(cmdStr);
       exec(cmdStr, {cwd: fePath}, function (err, stdout, stderr) {
-        if(err) {
+        if (err) {
           console.log('error:' + stderr);
         } else {
           console.log('success:' + stdout);
@@ -67,7 +67,6 @@ export class AppController {
     else {
       console.log('其他', request.originalUrl);
     }
-
     return `正在安装npm包: ${npmName}`;
   }
 }
