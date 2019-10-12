@@ -5,9 +5,11 @@ const {exec} = childProcess;
 const path = require('path');
 const express = require('express');
 const app = new express();
-
+// const fse = require('fs-extra');
+// const api2htmlFile = path.resolve(process.cwd(), 'src/js/api2html');
+// const api2html = require(api2htmlFile);
 app.set('view engine', 'html');
-const htmlPath = path.resolve(process.cwd(), 'necoo/build');
+const htmlPath = path.resolve(process.cwd(), 'front-end/dist');
 app.use(express.static(htmlPath));
 app.listen(9090, function() {
   console.log('服务创建成功');
@@ -22,19 +24,22 @@ export class AppController {
   @Get('npm/:npmName')
   getNpmName(@Param() params, @Req() request, @Response() res): string {
     const {npmName} = params;
-    console.log('req', request.originalUrl);
+    // const apis = api2html(fse, 'ss');
+
+    // console.log('req', JSON.stringify(apis));
+
     if (/npm\//.test(request.originalUrl)) {
       // cd ./page & npm i ${npmName} --save-dev
       const currentPath = path.resolve(process.cwd(), 'src/page');
       const reaplaceJsPath = path.resolve(process.cwd(), 'src/js');
-      const necooPath = path.resolve(process.cwd(), 'necoo');
+      const fePath = path.resolve(process.cwd(), 'front-end');
       const resultPath = path.resolve(process.cwd(), 'src/page/index.html');
       const errResultPath = path.resolve(process.cwd(), 'src/page/index_error.html');
       var cmdStr = `
         npm i ${npmName} --save-dev
     `;
-      console.log(currentPath);
-      exec(cmdStr, {cwd: currentPath}, function (err, stdout, stderr) {
+      console.log(cmdStr);
+      exec(cmdStr, {cwd: fePath}, function (err, stdout, stderr) {
         if(err) {
           console.log('error:' + stderr);
         } else {
@@ -44,7 +49,7 @@ export class AppController {
               console.log('replace error:' + stderr);
             } else {
               console.log('replace success:' + stdout);
-              exec(`npm run build`, {cwd: necooPath}, function (err, stdout, stderr) {
+              exec(`npm run build`, {cwd: fePath}, function (err, stdout, stderr) {
                 if (err) {
                   console.log('build error:' + stderr);
                   res.sendFile(errResultPath);

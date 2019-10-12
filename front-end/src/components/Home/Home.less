@@ -1,0 +1,158 @@
+.see-source {
+    width: 90px;
+    height: 40px;
+    background: #43A992;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1111111111111111111111;
+}
+.fresh-button {
+    width: 90px;
+    height: 40px;
+    background: #43A992;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    position: fixed;
+    right: 120px;
+    bottom: 20px;
+    z-index: 1111111111111111111111;
+}
+.iframeClass {
+    width: 50%;
+    height: 50%;
+    border: none;
+}
+
+.node rect {
+    cursor: pointer;
+    fill: #fff;
+    fill-opacity: 0.8;
+    stroke: #3182bd;
+    transition: fill .4s;
+    &:hover {
+        background-color: #fabd2f;
+    }
+}
+.node text {
+    font: 10px sans-serif;
+    pointer-events: none;
+}
+.link {
+    fill: none;
+    stroke: #9ecae1;
+    stroke-width: 1.5px;
+}
+#necoo-allCodeBox {
+    width: 1020px;
+    height: 3000px;
+    vertical-align: top;
+    display: inline-block;
+}
+#necoo-allCodePos {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+.tree-box {
+    display: inline-block;
+    position: relative;
+    z-index: 99999;
+    background-color: #fff;
+}
+.source-panel {
+    width: 30000px;
+}
+#preCode {
+    display: none;
+}
+.errorHighlight {
+    background: rgba(255, 0, 0, 0.73);;
+}
+.node-parent-close {
+    fill: #3182bd !important;
+    &:hover {
+        fill: #fabd2f !important;
+    }
+}
+.node-parent-open {
+    fill: #c6dbef !important;
+    &:hover {
+        fill: #fabd2f !important;
+    }
+}
+.node-children {
+    fill: #fd8d3c !important;
+    cursor: default;
+}
+
+.node-index {
+    fill: #fabd2f !important;
+    &:hover {
+        fill: #fabd2f !important;
+    }
+}
+.node-to-source {
+    fill: #fae817 !important;
+    &:hover {
+        fill: #fadf00 !important;
+    }
+}
+.node-to-exec {
+    fill: #fa6162 !important;
+    &:hover {
+        fill: #FA3000 !important;
+    }
+}
+.click-node {
+    fill: #FA3000 !important;
+}
+.time-split {
+    fill: #FAF7C8 !important;
+}
+.ul-box {
+    padding: 10px;
+    width: 30%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    display: block;
+    break-inside: avoid;
+    overflow: hidden;
+    background-color: #F99157;
+    color: #fff;
+    li {
+        cursor: pointer;
+        padding: 10px 20px;
+        .item-name {
+            position: relative;
+            .item-type {
+                position: absolute;
+                right: -40px;
+                top: 0;
+                font-size: 12px;
+                color: #00f;
+            }
+        }
+    }
+    li:nth-child(odd) {
+        color: #e6e6e6;
+        background-color: rgba(0,0,0,0.05);
+    }
+    li:hover {
+        background-color: rgba(255,255,255,0.1);
+        color: black;
+    }
+}
+#code-box {
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    z-index: 9999999999;
+    overflow: scroll;
+}

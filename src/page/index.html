@@ -8,6 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-安装完成，请打开<a target="_blank" href="http://localhost:9090">http://localhost:9090</a> 查看
+<div id="app">
+</div>
 </body>
+<script>
+    var $app = document.getElementById('app');
+    var hostname = location.hostname;
+    var protocol = location.protocol;
+    var port = 9090;
+    var link = `${protocol}//${hostname}:${port}`;
+    $app.innerHTML = `
+    安装完成，请打开<a target="_blank" href="${link}">${link}</a> 查看
+    `;
+</script>
 </html>
