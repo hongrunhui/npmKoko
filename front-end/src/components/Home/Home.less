@@ -44,6 +44,7 @@
 .node text {
     font: 10px sans-serif;
     pointer-events: none;
+    font-size: 16px;
 }
 .link {
     fill: none;
@@ -63,7 +64,9 @@
 }
 .tree-box {
     display: inline-block;
-    position: relative;
+    position: absolute;
+    left: 500px;
+    top: 100px;
     z-index: 99999;
     background-color: #fff;
 }
@@ -151,14 +154,12 @@
     }
 }
 #code-box {
-    position: absolute;
-    top: 100px;
-    left: 500px;
-    z-index: 9999999999;
+    position: fixed;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
     overflow: scroll;
-    pre {
-        text-align: left !important;
-    }
+    width: 500px;
 }
 
 

@@ -5,8 +5,9 @@ function renderTree(selector, data, clickHandle) {
     document.querySelector(selector).innerHTML ='';
     var margin = {top: 30, right: 20, bottom: 30, left: 20},
         width = 960,
-        barHeight = 20,
-        barWidth = (width - margin.left - margin.right) * 0.2;
+        barHeight = 30,
+        barWidth = (width - margin.left - margin.right) * 0.2,
+        barUnitWidth = 10;
     var i = 0,
         duration = 400,
         root;
@@ -52,7 +53,10 @@ function renderTree(selector, data, clickHandle) {
         nodeEnter.append("rect")
             .attr("y", -barHeight / 2)
             .attr("height", barHeight)
-            .attr("width", barWidth*2)
+            .attr("width", (d) => {
+                console.log('d', d, d.data.name && d.data.name.length * barUnitWidth);
+                return d.data.name && d.data.name.length * barUnitWidth || barWidth;
+            })
             .style("fill", color)
             .on("click", click);
         nodeEnter.append("text")
@@ -140,61 +144,9 @@ function renderTree(selector, data, clickHandle) {
             d.x0 = d.x;
             d.y0 = d.y;
         });
-        function renderSource(type, d) {
-            let index = d.data.index;
-            let sourceLine = '';
-            if (type === 'exec') {
-                if (d.data.obj.callLine.father) {
-                    sourceLine = d.data.obj.callLine.father.lineNumber;
-                    window.allCodeEditor.scrollIntoView({line: d.data.obj.callLine.father.lineNumber, ch: d.data.obj.callLine.father.columnNumber});
-                    window.allCodeEditor.doc.markText({line:d.data.obj.callLine.father.lineNumber-1, ch: 0},{line: d.data.obj.callLine.father.lineNumber-1, ch: d.data.obj.callLine.father.columnNumber}, {className: "errorHighlight", css: 'animation:mymove 5s;'});
-                }
-            }
-            if (type === 'source') {
-                if (d.data.obj.callLine.self) {
-                    let self = d.data.obj.callLine.self;
-                    sourceLine = self.lineNumber;
-                    window.allCodeEditor.scrollIntoView({line: self.lineNumber, ch: self.columnNumber});
-                    window.allCodeEditor.doc.markText({line: self.lineNumber-1, ch: 0},{line: self.lineNumber-1, ch: self.columnNumber}, {className: "errorHighlight", css: 'animation:mymove 5s;'});
-                }
-            }
-            // clickEl._groups.forEach(item => {
-            //     item.forEach(list => {
-            //         list.__data__.isClick = false;
-            //     });
-            // });
-            d.isClick = true;
-            // clickEl.style('fill', setClickColor);
-            if (typeof index !== 'undefined') {
-                // let sourceBox = d3.select('#preCode');
-                // sourceBox.style("position", 'absolute');
-                // sourceBox.style("left", d.y + barWidth + 1200 + 'px');
-                // sourceBox.style("top", d.x + 'px');
-                // renderCode(d.data.obj.func);
-            }
-            if (d.data.obj.isVariable) {
-                console.log('%c变量： ', 'color:red;font-size:20px;', d.data.obj.variable);
-                return;
-            }
-            console.table('%c输入：', 'color:#0f0;;font-size:20px;', d.data.obj.args);
-            console.log('%c输出' + sourceLine + '行：', 'color:red;font-size:20px;', d.data.obj.returnValue);
-            console.log('%c-----------------------', 'color: #f0f');
-            function addClass(obj,cls) {
-                var obj_class=obj.className,//获取class的内容；
-                    blank = ( obj_class != '' ) ? ' ' : '';//判断获取的class是否为空，如果不为空，则添加空格；
-                if (obj_class.indexOf(cls) > -1) {
-                    return;
-                }
-                var added = obj_class + blank + cls;//组合原来的class和需要添加的class，中间加上空格；
-                obj.className = added;//替换原来的class；
-            }
-
-            update(d);
-        }
     }
     // Toggle children on click.
     function click(d, e, f) {
-        console.log(d, e, f);
         clickHandle && clickHandle(d);
         // renderCode(d);
         if (d.children) {
@@ -203,6 +155,16 @@ function renderTree(selector, data, clickHandle) {
         } else {
             d.children = d._children;
             d._children = null;
+            const {children} = d;
+            console.log('children', children);
+            if (children && children.length) {
+                children.forEach(point => {
+                    if (point.children) {
+                        point._children = point.children;
+                        point.children = null;
+                    }
+                });
+            }
         }
         update(d);
     }

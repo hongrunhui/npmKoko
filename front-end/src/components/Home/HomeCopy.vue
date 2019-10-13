@@ -3,7 +3,7 @@
         <div class='tree-box'>
             hi
         </div>
-        <div class="code-box" id="code-box" :style="{top: y, right: x}">
+        <div class="code-box" id="code-box">
             <codemirror v-model="code" :options="cmOption"></codemirror>
         </div>
     </div>
@@ -60,12 +60,6 @@
             changeCode(code) {
                 this.code = code;
             },
-            changeCodePosition(x, y) {
-                this.x = d.x + 'px';
-                this.y = d.y + 1200 + 'px';
-                // sourceBox.style("left", d.y + barWidth + 1200 + 'px');
-                // sourceBox.style("top", d.x + 'px');
-            }
         },
         data () {
             return {
