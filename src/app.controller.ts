@@ -8,12 +8,6 @@ const app = new express();
 // const fse = require('fs-extra');
 // const api2htmlFile = path.resolve(process.cwd(), 'src/js/api2html');
 // const api2html = require(api2htmlFile);
-app.set('view engine', 'html');
-const htmlPath = path.resolve(process.cwd(), 'front-end/dist');
-app.use(express.static(htmlPath));
-app.listen(9090, function() {
-  console.log('服务创建成功');
-});
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
