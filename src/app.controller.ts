@@ -49,9 +49,9 @@ export class AppController {
               console.log('replace error:' + stderr);
             } else {
               console.log('replace success:' + stdout);
-              exec(`npm run build`, {cwd: fePath}, function (err, stdout, stderr) {
+              exec(`npm run build`, {cwd: fePath, maxBuffer: 1024 * 1024 * 10}, function (err, stdout, stderr) {
                 if (err) {
-                  console.log('build error:' + stderr);
+                  console.log('build error:' + stderr, err);
                   res.sendFile(errResultPath);
                 }
                 else {
