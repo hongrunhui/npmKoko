@@ -1,4 +1,10 @@
 let cache = [];
+function isProto(obj, key) {
+    console.log('!obj.hasOwnProperty(key)', obj, key, !obj.hasOwnProperty(key), key in obj);
+    return !obj.hasOwnProperty(key) && (key in obj);
+}
+const filterKeys = ['name', 'length', 'constructor'];
+
 function circleApi(api, aprentMap) {
     if (!api) {
         return;
@@ -20,6 +26,12 @@ function circleApi(api, aprentMap) {
         }
     }
     for (let key in map) {
+        if (filterKeys.includes(key)) {
+            continue;
+        }
+        if (key === 'prototype' && Object.getOwnPropertyNames(map[key]).length <= 3) {
+            continue;
+        }
         let currentMap = {
             name: `${aprentMap.name}.${key}`,
             value: map[key],
