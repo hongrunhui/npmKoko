@@ -5,9 +5,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'front-end/dist'),   // <-- path to the static files
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'front-end/dist'),   // <-- path to the static files
+    // }),
   ],
   controllers: [AppController],
   providers: [AppService],
