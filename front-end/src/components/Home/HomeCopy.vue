@@ -94,7 +94,9 @@
             const data = api2html(API, '${name}');
             const boxSelector = '.tree-box';
             renderTree(boxSelector, data, (d) => {
-                const code = d.data.value.toString();
+                const {value} = d.data;
+                const keys = value && Object.keys(value).join(': \n') || '找不到值';
+                const code = value && value.toString && value.toString() || keys;
                 this.changeCode(code);
             });
             setTimeout(() => {
@@ -114,6 +116,15 @@
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
         background-position: bottom;
         background-repeat: repeat-x;
+    }
+    .CodeMirror {
+        height: 100% !important;
+    }
+    .cm-matchhighlight {
+        background-color: red !important;
+    }
+    .cm-s-monokai span.cm-attribute, .cm-s-monokai span.cm-property {
+
     }
     .cm-matchhighlight {background-color: lightgreen}
     .CodeMirror-selection-highlight-scrollbar {background-color: green}

@@ -50,7 +50,7 @@
     import'codemirror/addon/fold/markdown-fold.js'
     import'codemirror/addon/fold/xml-fold.js'
     import { codemirror } from 'vue-codemirror'
-    import * as API from 'vue';
+    import * as API from 'cheerio';
     export default {
         name: 'Home',
         components: {
@@ -91,10 +91,12 @@
             }
         },
         mounted() {
-            const data = api2html(API, 'vue');
+            const data = api2html(API, 'cheerio');
             const boxSelector = '.tree-box';
             renderTree(boxSelector, data, (d) => {
-                const code = d.data.value.toString();
+                const {value} = d.data;
+                const keys = value && Object.keys(value).join(': \n') || '找不到值';
+                const code = value && value.toString && value.toString() || keys;
                 this.changeCode(code);
             });
             setTimeout(() => {
@@ -114,6 +116,15 @@
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
         background-position: bottom;
         background-repeat: repeat-x;
+    }
+    .CodeMirror {
+        height: 100% !important;
+    }
+    .cm-matchhighlight {
+        background-color: red !important;
+    }
+    .cm-s-monokai span.cm-attribute, .cm-s-monokai span.cm-property {
+
     }
     .cm-matchhighlight {background-color: lightgreen}
     .CodeMirror-selection-highlight-scrollbar {background-color: green}

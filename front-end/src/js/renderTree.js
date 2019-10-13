@@ -54,7 +54,6 @@ function renderTree(selector, data, clickHandle) {
             .attr("y", -barHeight / 2)
             .attr("height", barHeight)
             .attr("width", (d) => {
-                console.log('d', d, d.data.name && d.data.name.length * barUnitWidth);
                 return d.data.name && d.data.name.length * barUnitWidth || barWidth;
             })
             .style("fill", color)
@@ -156,7 +155,7 @@ function renderTree(selector, data, clickHandle) {
             d.children = d._children;
             d._children = null;
             const {children} = d;
-            console.log('children', children);
+            // 孙子不展开
             if (children && children.length) {
                 children.forEach(point => {
                     if (point.children) {
