@@ -50,7 +50,7 @@
     import'codemirror/addon/fold/markdown-fold.js'
     import'codemirror/addon/fold/xml-fold.js'
     import { codemirror } from 'vue-codemirror'
-    import * as API from 'cheerio';
+    import * as API from 'vue';
     export default {
         name: 'Home',
         components: {
@@ -91,7 +91,7 @@
             }
         },
         mounted() {
-            const data = api2html(API, 'cheerio');
+            const data = api2html(API, 'vue');
             const boxSelector = '.tree-box';
             renderTree(boxSelector, data, (d) => {
                 const {value} = d.data;

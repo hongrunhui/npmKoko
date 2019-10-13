@@ -3,7 +3,7 @@ function isProto(obj, key) {
     console.log('!obj.hasOwnProperty(key)', obj, key, !obj.hasOwnProperty(key), key in obj);
     return !obj.hasOwnProperty(key) && (key in obj);
 }
-const filterKeys = ['name', 'length', 'constructor'];
+const filterKeys = ['name', 'length', 'constructor', 'arguments', 'caller'];
 
 function circleApi(api, aprentMap) {
     if (!api) {
