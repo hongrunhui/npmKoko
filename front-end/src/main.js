@@ -5,6 +5,10 @@ import App from './App';
 import router from './router';
 import { codemirror } from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
+import 'element-ui/lib/theme-chalk/index.css';
+import Element from 'element-ui'
+
+Vue.use(Element)
 Vue.use(codemirror)
 Vue.config.productionTip = false;
 

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <el-input v-model="input" placeholder="请输入内容"></el-input>
         <div class='tree-box'>
             hi
         </div>
@@ -63,6 +64,7 @@
         },
         data () {
             return {
+                input: '',
                 code: '',
                 x: '-1000px',
                 y: '0',
