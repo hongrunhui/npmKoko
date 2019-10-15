@@ -1,11 +1,19 @@
 <template>
-    <div>
-        <el-input v-model="input" placeholder="请输入内容"></el-input>
-        <div class='tree-box'>
-            hi
+    <div class="home"
+         v-loading="isLoading"
+    >
+        <div class="header">
+            <el-input v-model="input" placeholder="请输入内容"
+                      @keyup.enter.native="npmSelect"
+            ></el-input>
         </div>
-        <div class="code-box" id="code-box">
-            <codemirror v-model="code" :options="cmOption"></codemirror>
+        <div class="content">
+            <div class='tree-box'>
+                hi
+            </div>
+            <div class="code-box" id="code-box">
+                <codemirror v-model="code" :options="cmOption"></codemirror>
+            </div>
         </div>
     </div>
 </template>
@@ -51,7 +59,9 @@
     import'codemirror/addon/fold/markdown-fold.js'
     import'codemirror/addon/fold/xml-fold.js'
     import { codemirror } from 'vue-codemirror'
-    import * as API from 'vue';
+    import * as API from 'cheerio';
+    // import
+    import axios from 'axios';
     export default {
         name: 'Home',
         components: {
@@ -61,9 +71,27 @@
             changeCode(code) {
                 this.code = code;
             },
+            npmSelect(e) {
+                const {value} = e.target;
+                if (value) {
+                    this.isLoading = true;
+                    axios.post(`/npm`, {
+                        name: value
+                    }).then(result => {
+                        this.isLoading = false;
+                        const {data, status} = result;
+                        if (status === 200) {
+                            window.location.reload();
+                        }
+                        console.log('data', data);
+                    })
+                }
+                console.log('e', e);
+            }
         },
         data () {
             return {
+                isLoading: false,
                 input: '',
                 code: '',
                 x: '-1000px',
@@ -93,7 +121,7 @@
             }
         },
         mounted() {
-            const data = api2html(API, 'vue');
+            const data = api2html(API, 'cheerio');
             const boxSelector = '.tree-box';
             renderTree(boxSelector, data, (d) => {
                 const {value} = d.data;
@@ -108,26 +136,6 @@
         }
     }
 </script>
-
-<style>
-    @import './Home.less';
-    #code-box .CodeMirror-sizer {
-        text-align: left !important;
-    }
-    .CodeMirror-focused .cm-matchhighlight {
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
-        background-position: bottom;
-        background-repeat: repeat-x;
-    }
-    .CodeMirror {
-        height: 100% !important;
-    }
-    .cm-matchhighlight {
-        background-color: red !important;
-    }
-    .cm-s-monokai span.cm-attribute, .cm-s-monokai span.cm-property {
-
-    }
-    .cm-matchhighlight {background-color: lightgreen}
-    .CodeMirror-selection-highlight-scrollbar {background-color: green}
+<style lang="less" >
+    @import './home.less';
 </style>

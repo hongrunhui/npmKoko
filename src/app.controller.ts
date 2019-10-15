@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Response, Req, Render } from '@nestjs/common';
+import { Controller, Get, Post, Param, Response, Req, Render, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 const childProcess = require('child_process');
 const {exec} = childProcess;
@@ -15,9 +15,13 @@ export class AppController {
   homePage(@Param() params): string {
     return 'hello world';
   }
-  @Get('npm/:npmName')
-  getNpmName(@Param() params, @Req() request, @Response() res): string {
-    const {npmName} = params;
+  @Post('npm')
+  getNpmName(@Body() rData, @Param() params, @Req() request, @Response() res): string {
+    console.log('rData', rData);
+    let {npmName} = params;
+    if (!npmName) {
+      npmName = rData.name || 'redux';
+    }
     // const apis = api2html(fse, 'ss');
     // console.log('req', JSON.stringify(apis));
     // cd ./page & npm i ${npmName} --save-dev
@@ -43,15 +47,22 @@ export class AppController {
             exec(`npm run build`, {cwd: fePath, maxBuffer: 1024 * 1024 * 10}, function (err, stdout, stderr) {
               if (err) {
                 console.log('build error:' + stderr, err);
-                res.status(400).json({
-                  msg: '编译失败'
-                })
+                // res.status(400).json({
+                //   msg: '编译失败'
+                // })
+                res.status(400).send({
+                  msg: '安装失败'
+                });
               }
               else {
                 console.log('build success:' + stdout);
-                res.status(200).json({
+                res.status(200).send({
                   msg: '安装成功'
-                })
+                });
+                return {mm: 'hi'}
+                // res.status(200).json({
+                //   msg: '安装成功'
+                // })
               }
             })
           }

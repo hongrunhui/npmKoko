@@ -14,14 +14,16 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "codemirror": "^5.49.0",
-    "element-ui": "^2.12.0",
     "mobx": "^5.14.0",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "accepts": "^1.3.7",
+    "angular": "^1.7.8",
+    "apexcharts": "^3.10.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
@@ -43,6 +45,8 @@
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
     "d3": "^5.12.0",
+    "element": "^0.1.4",
+    "element-ui": "^2.12.0",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -59,6 +63,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
+    "jquery": "^3.4.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "nightwatch": "^0.9.12",
@@ -69,6 +74,7 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "promise": "^8.0.3",
     "redux": "^4.0.4",
     "rimraf": "^2.6.0",
     "riot": "^4.6.5",
