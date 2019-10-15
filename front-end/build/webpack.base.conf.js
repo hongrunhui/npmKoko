@@ -51,10 +51,6 @@ module.exports = {
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
-    {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
-    },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
